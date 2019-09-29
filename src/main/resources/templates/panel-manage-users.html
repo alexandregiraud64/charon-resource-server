@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Charon - Oauth authentication server</title>
+        <meta charset="utf-8" />
+ 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/main.css" th:href="@{/css/main.css}" />
+        <link rel="stylesheet" href="css/main.css" th:href="@{/css/panel-manage-users.css}" />
+	</head>
+    <body>
+        <div th:replace="index::brand-panel"></div>
+        <div th:replace="index::menu-panel"></div>
+        
+		<div class="container">
+			<h2 class="title">Manage Users</h2>
+   			<div th:replace="index::alerts-panel"></div>
+			
+			<div class="users-panel">
+				<th:block th:each="user : ${users}">
+					<div class="user-panel">
+						<div class="username">
+							<i class="fa fa-user"></i> <span th:utext="${user.roles}"></span> <span th:utext="${user.username}"></span>
+						</div>
+						<!-- TODO: Add the ID to the following link to make them work -->
+						<a th:if="${!#lists.contains(user.roles, 'ROLE_ADMIN')}" th:href="@{/user/upgrade/} + ${user.userId}" class="btn-upgrade">Upgrade</a>
+						<a th:if="${!#lists.contains(user.roles, 'ROLE_ADMIN')}" th:href="@{/user/delete/} + ${user.userId}" class="btn-delete">Delete</a>
+					</div>
+				</th:block>
+			</div>
+		</div>
+    </body>
+</html>

@@ -1,0 +1,6 @@
+.registration-form {
+	border: 2px solid black;
+	border-radius: 16px;
+	max-width: 520px;
+	margin: 25px auto;
+}

@@ -1,0 +1,64 @@
+.container {
+	border: 2px solid black;
+	border-radius: 16px;
+	max-width: 780px;
+	margin: 25px auto;
+	padding: 16px;
+}
+
+.title {
+	text-align: center;
+}
+
+.client-panel {
+	border: 1px solid grey;
+	padding: 10px 20px;
+	margin: 2px;
+	text-align: center;
+}
+
+.btn-delete {
+	display: inline-block;
+	background-color: #f44336;
+	color: #FFFFFF;
+	padding: 12px 20px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 16px;
+	margin: 0 10px;
+	opacity: 0.9;
+}
+
+.btn-delete:hover {
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.client-title {
+	font-weight: bold;
+	font-size: 24px;
+	padding: 10px 0;
+}
+
+.client-detail {
+	font-size: 12px;
+	text-align: left;
+}
+
+.client-detail .title {
+	font-weight: bold;
+	display: inline;
+}
+
+.client-detail .data {
+	display: inline;
+}
+
+.client-actions {
+	margin: 10px 0 0 0;
+}
+
+.clients-panel {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	width: 100%;
+}

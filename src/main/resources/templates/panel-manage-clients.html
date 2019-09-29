@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Charon - Oauth authentication server</title>
+        <meta charset="utf-8" />
+ 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/main.css" th:href="@{/css/main.css}" />
+        <link rel="stylesheet" href="css/main.css" th:href="@{/css/panel-manage-clients.css}" />
+	</head>
+    <body>
+        <div th:replace="index::brand-panel"></div>
+        <div th:replace="index::menu-panel"></div>
+        
+		<div class="container">
+			<h2 class="title">Manage Clients</h2>
+			
+   			<div th:replace="index::alerts-panel"></div>
+   			
+			<div class="clients-panel">
+				<th:block th:each="client : ${clients}">
+					<div class="client-panel">
+						<div class="client-title" th:utext="${client.displayName}">AppName</div>
+						<div class="client-detail">
+							<div class="title">Client ID: </div>
+							<div class="data" th:utext="${client.clientId}"></div>
+						</div>
+						<div class="client-detail">
+							<div class="title">Scopes: </div>
+							<div class="data" th:utext="${client.scope}"></div>
+						</div>
+						<div class="client-detail">
+							<div class="title">Grant types: </div>
+							<div class="data" th:utext="${client.authorizedGrantTypes}"></div>
+						</div>
+						<div class="client-detail">
+							<div class="title">Redirect URI: </div>
+							<div class="data" th:utext="${client.registeredRedirectUri}"></div>
+						</div>
+						<div class="client-actions">
+							<a th:href="@{/client/delete/} + ${client.clientId}" class="btn-delete">Delete</a>
+						</div>
+					</div>
+				</th:block>
+			</div>
+		</div>
+    </body>
+</html>

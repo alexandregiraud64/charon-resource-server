@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Charon - Oauth authentication server</title>
+        <meta charset="utf-8" />
+ 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/main.css" th:href="@{/css/main.css}" />
+        <link rel="stylesheet" href="css/main.css" th:href="@{/css/form-registration-client.css}" />
+	</head>
+    <body>
+        <div th:replace="index::brand-panel"></div>
+        <div th:replace="index::menu-panel"></div>
+        
+		<div class="client-registration-form">
+			<form th:action="@{/client/create}" th:object="${client}" method="post">
+				<div class="container">
+					<p>Please fill in this form to create a new client.</p>
+	
+        			<div th:replace="index::alerts-panel"></div>
+        			
+					<div class="alert alert-danger" th:if="${#fields.hasErrors('global')}">
+					    <p th:each="err : ${#fields.errors('global')}" th:text="${err}"></p>    
+					</div>
+					
+					<div class="input-label">Display name</div>
+					<input type="text" placeholder="Enter Display name" name="displayName" required>
+
+					<div class="input-label">Password</div>
+					<input type="password" placeholder="Enter Password" name="clientSecret" required>
+
+					<div class="input-label">Repeat password</div>
+					<input type="password" placeholder="Repeat Password" name="clientSecretConfirm" required>
+					
+					<div class="alert alert-danger" th:if="${#fields.hasErrors('clientSecretConfirm')}">
+					    <p th:each="err : ${#fields.errors('clientSecretConfirm')}" th:text="${err}"></p>
+					</div>
+					
+					<div class="input-label">Redirect URI</div>
+					<input type="text" placeholder="Enter Redirect URI" name="registeredRedirectUri" required>
+					
+					<div class="input-label">Scopes</div>
+					<th:block th:each="scope : ${scopes}">
+						<label class="checkbox-container"><input type="checkbox" name="scope" th:value="${scope.name}" th:text="' ' + ${scope.name}"></label>
+					</th:block>
+					
+					<div class="input-label">Grant types</div>
+					<label class="checkbox-container"><input type="checkbox" value="authorization-code" name="authorizedGrantTypes">Authorization Code</label>
+					<label class="checkbox-container" sec:authorize="hasRole('ROLE_ADMIN')"><input type="checkbox" value="implicit" name="authorizedGrantTypes">Implicit</label>
+					<label class="checkbox-container" sec:authorize="hasRole('ROLE_ADMIN')"><input type="checkbox" value="password" name="authorizedGrantTypes">Password</label>
+					<label class="checkbox-container" sec:authorize="hasRole('ROLE_ADMIN')"><input type="checkbox" value="client-credentials" name="authorizedGrantTypes">Client Credentials</label>
+					<!-- The grant type 'Device code' hasn't been implemented/tested yet -->
+					<!-- <label class="checkbox-container"><input type="checkbox" value="device-code" name="authorizedGrantTypes">Device Code</label> -->
+					<label class="checkbox-container"><input type="checkbox" value="refresh-token" name="authorizedGrantTypes">Refresh Token</label>
+						
+					<p>By creating a client you agree to our <a href="">Terms and Privacy</a>.</p>
+					<button type="submit">Register</button>
+				</div>
+			</form>
+		</div>
+    </body>
+</html>

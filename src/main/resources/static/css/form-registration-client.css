@@ -1,0 +1,19 @@
+.client-registration-form {
+	border: 2px solid black;
+	border-radius: 16px;
+	max-width: 520px;
+	margin: 25px auto;
+}
+
+.input-label {
+	font-weight: bold;
+	width: 100%;
+	display: inline-block;
+	margin: 8px 0;
+}
+
+.checkbox-container {
+	width: 100%;
+	display: inline-block;
+	padding-left: 25px;
+}

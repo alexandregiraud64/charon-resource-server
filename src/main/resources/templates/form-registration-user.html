@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Charon - Oauth authentication server</title>
+        <meta charset="utf-8" />
+ 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/main.css" th:href="@{/css/main.css}" />
+        <link rel="stylesheet" href="css/main.css" th:href="@{/css/form-registration-user.css}" />
+	</head>
+    <body>
+        <div th:replace="index::brand-panel"></div>
+        <div th:replace="index::menu-panel"></div>
+        
+		<div class="registration-form">
+			<form th:action="@{/user/create}" th:object="${user}" action="action_page.php" method="post">
+				<div class="container">
+					<p>Please fill in this form to create an account.</p>
+					
+        			<div th:replace="index::alerts-panel"></div>
+        			
+					<label for="uname"><b>Username</b></label>
+					<input type="text"  th:field="*{username}" placeholder="Enter Username" name="uname" required>
+
+					<div class="alert alert-danger" th:if="${#fields.hasErrors('username')}">
+					    <p th:each="err : ${#fields.errors('username')}" th:text="${err}"></p>    
+					</div>
+					
+					<label for="psw"><b>Password</b></label>
+					<input type="password" th:field="*{password}" placeholder="Enter Password" name="psw" required>
+
+					<div class="alert alert-danger" th:if="${#fields.hasErrors('password')}">
+					    <p th:each="err : ${#fields.errors('password')}" th:text="${err}"></p>    
+					</div>
+					
+					<label for="repeat-psw"><b>Repeat password</b></label>
+					<input type="password" th:field="*{passwordConfirm}" placeholder="Repeat Password" name="repeat-psw" required>
+
+					<div class="alert alert-danger" th:if="${#fields.hasErrors('passwordConfirm')}">
+					    <p th:each="err : ${#fields.errors('passwordConfirm')}" th:text="${err}"></p>    
+					</div>
+					
+					<label for="email"><b>Email</b></label>
+					<input type="email" th:field="*{emailAddress}" placeholder="Enter Email" name="email" required>
+					
+					<label for="fullname"><b>Fullname</b></label>
+					<input type="text" th:field="*{fullName}" placeholder="Enter Fullname" name="fullname" required>
+					
+					<label for="phone-number"><b>Phone number</b></label>
+					<input type="text" th:field="*{phoneNumber}" placeholder="Enter Phone number" name="phone-number" required>
+					
+					<label for="profile-image"><b>Profile image</b></label>
+					<input type="text" th:field="*{profileImage}" placeholder="Enter Profile image" name="profile-image" required>
+						
+					<p>By creating an account you agree to our <a href="">Terms and Privacy</a>.</p>
+					<button type="submit">Register</button>
+				</div>
+			</form>
+		</div>
+    </body>
+</html>
